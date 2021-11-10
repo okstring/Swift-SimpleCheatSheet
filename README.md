@@ -44,6 +44,8 @@ Swift5를 기반으로 작성된 Swift Cheat Sheet 입니다. 본인이 성장�
     - while, do-while
     - Checking API Availability
     - Error Handle
+- Function
+- Closure
 
 정리되는데로 추가됩니다.
 
@@ -1260,6 +1262,155 @@ func calculateAverage(_ numbers: Double...) -> Double {
 print(calculateAverage(1, 2, 3))
 // 2
 ```
+
+
+
+
+
+# Closure
+
+클로저는 일반적으로 이런 형태를 띕니다.
+
+```
+{  (parameters) -> return type in
+    statements
+}
+```
+
+
+
+밑에서 리턴하는 결과는 모두 똑같다
+
+```swift
+var names: Array<String> = ["Chris", "Alex", "Ewa", "Barry", "Danialla"]
+
+func backward(_ s1: String, _ s2: String) -> Bool {
+    return s1 > s2
+}
+var reverseNames = names.sorted(by:backward)
+
+var reversedNames = names.sorted(by: { (s1: String, s2: String) -> Bool in
+    return s1 > s2
+})
+
+var reversedNames = names.sorted(by: { s1, s2 in return s1 > s2}) // Inferring Type From context
+
+var reversedNames = names.sorted(by: {s1, s2 in s1 > s2}) // Implicit Returns from Single-Expression Closures
+
+var reversedNames = names.sorted(by: { $0 > $1 }) // Shorthand Argument Names
+```
+
+[reference](https://docs.swift.org/swift-book/LanguageGuide/Closures.html#:~:text=Swift%20automatically%20provides%20shorthand%20argument,%2C%20%242%20%2C%20and%20so%20on.)
+
+
+
+### 비교 연산자를 클로저로 할당
+
+```swift
+var comparator: (Int, Int) -> Bool = (>)
+```
+
+
+
+### defer
+
+- defer는 클로저 안에 현재 스코프의 맨 뒤에 실행되어야 하는 코드를 넣어 사용한다
+- defer는 클로져안에 현재 스코프의 맨 끝에 실행되어야 하는 코드 일부를 넣어서 사용한다.
+
+
+
+```swift
+var a = "Hello"
+
+func b() -> String {
+  defer { a.append(" world") }
+  return a
+}
+func d() -> String {
+  a.append(" world")
+  return a
+}
+a = "Hello"
+print(b())
+a = "Hello"
+print(d())
+
+// Hello
+// Hello world
+```
+
+[reference](https://kor45cw.tistory.com/269)
+
+
+
+### @escaping(탈출 클로저)
+
+함수가 종료된 뒤에 클로저가 필요한 경우
+
+- 클로저 저장: 글로벌 변수에 클로저를 저장하여 함수가 종료된 후에 사용되는 경우
+- 대표적인 예로 비동기 작업이 있는데 디스패치 큐 등을 사용하여 비동기 작업을 수행하는 경우, 함수가 종료된 뒤에도 클로저를 메모리에 잡아두어 비동기 작업을 이어가도록 해야 함
+
+
+
+```swift
+func work(after second: Int, completion: @escaping (() -> Void)) {
+    let deadline = DispatchTime.now() + .seconds(second)
+    DispatchQueue.main.asyncAfter(deadline: deadline) {
+        completion()
+    }
+}
+
+```
+
+[reference](https://oaksong.github.io/2018/03/02/escaping-closure/)
+
+
+
+### 읽기 전용 계산된 프로퍼티(Read-Only Computed Properties)와 클로저로 값을 할당하는건 다르다
+
+```swift
+var text = "Hello, World!"
+
+//closure로 변수 할당
+var foo: String = {
+    return text
+}()
+
+//Read-Only Computed Properties
+var bar: String {
+    return text
+}
+
+print(foo) //Hello, World!
+print(bar) //Hello, World!
+
+text = "Hello, okstring!"
+
+print(foo) //Hello, World!
+print(bar) //Hello, okstring!
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
