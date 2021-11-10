@@ -428,7 +428,8 @@ print(stringArray.sorted())
  
 
 ```swift
-1.distance(to: 2)// 1
+1.distance(to: 2)
+// 1
 ```
 
 
@@ -438,7 +439,9 @@ print(stringArray.sorted())
 ### ternary to decimal(3진수를 10진수로 변환)
 
 ```swift
-var ternary = String(10, radix: 3) // String으로 반환print(Int(ternary, radix: 3)!) // Int로 반환, Optional// 10
+var ternary = String(10, radix: 3) // String으로 반환
+print(Int(ternary, radix: 3)!) // Int로 반환, Optional
+// 10
 ```
 
 
@@ -446,7 +449,8 @@ var ternary = String(10, radix: 3) // String으로 반환print(Int(ternary, radi
 ### String - NSString을 사용해 Int로 변환
 
 ```swift
-//2진수를 Int로 변환String(format: "%.\(total)d", (String(3, radix: 2) as NSString).integerValue)
+//2진수를 Int로 변환
+String(format: "%.\(total)d", (String(3, radix: 2) as NSString).integerValue)
 ```
 
 
@@ -456,7 +460,8 @@ var ternary = String(10, radix: 3) // String으로 반환print(Int(ternary, radi
 
 
 ```swift
-print(Int("-123")!)// -123
+print(Int("-123")!)
+// -123
 ```
 
 
@@ -472,7 +477,8 @@ print(Int("-123")!)// -123
 ### 숫자 읽기 편하게하기
 
 ```swift
-var foo = 111111var bar = 111_111print(foo == bar)//true
+var foo = 111111var bar = 111_111print(foo == bar)
+//true
 ```
 
 
@@ -495,7 +501,8 @@ var foo = 111111var bar = 111_111print(foo == bar)//true
 - 십진수의 반대가(문자열) 해당된다
 
     ```swift
-    print("1a3b5".components(separatedBy: CharacterSet.decimalDigits.inverted).joined())// 135
+    print("1a3b5".components(separatedBy: CharacterSet.decimalDigits.inverted).joined())
+    // 135
     ```
 
 
@@ -505,7 +512,9 @@ var foo = 111111var bar = 111_111print(foo == bar)//true
 
 
 ```swift
-print(UnicodeScalar(90)!) // Zprint(UnicodeScalar("a").value) // 97
+print(UnicodeScalar(90)!) // Z
+
+print(UnicodeScalar("a").value) // 97
 ```
 
 
@@ -517,7 +526,19 @@ print(UnicodeScalar(90)!) // Zprint(UnicodeScalar("a").value) // 97
 - index의 복수
 
 ```swift
-let greeting = "Guten Tag"for index in greeting.characters.indices {    print(greeting[index])}// G// u// t// e// n// // T// a// g
+let greeting = "Guten Tag"
+for index in greeting.characters.indices {
+  print(greeting[index])
+}
+// G
+// u
+// t
+// e
+// n
+// 
+// T
+// a
+// g
 ```
 
 
@@ -577,7 +598,21 @@ var comparator: (Int, Int) -> Bool = (<)
 ## ASCII
 
 ```swift
-var str = "Ho"extension StringProtocol {    var asciiValues: [UInt8] { compactMap(\.asciiValue) }}print(str.asciiValues) // [72, 111]print(str.utf16.map( {Int($0)} )) // [72, 111]
+var str = "Ho"
+
+extension StringProtocol {
+  var asciiValues: [UInt8] {
+    compactMap(\.asciiValue) 
+  }
+}
+
+print(str.asciiValues) 
+
+// [72, 111]
+
+print(str.utf16.map( {Int($0)} )) 
+
+// [72, 111]
 ```
 
 
@@ -654,7 +689,18 @@ arr.firstIndex(where: {$0 == 3})
 > 배열에 요소를 추가할 때, 해당 배열이 예약된 용량을 초과하기 시작하면 배열은 더 큰 메모리 영역을 할당하고, 요소를 방금 할당한 새 메모리에 복사합니다. 이때 새로운 저장소는 이전 저장소 크기의 2배입니다.
 
 ```swift
-var arr = [Int]()arr.append(1)arr.capacity // 2arr.append(1)arr.capacity // 2arr.append(1)arr.capacity // 4
+var arr = [Int]()
+arr.append(1)
+arr.capacity 
+// 2
+
+arr.append(1)
+arr.capacity 
+// 2
+
+arr.append(1)
+arr.capacity
+// 4
 ```
 
 
@@ -693,7 +739,10 @@ var arr = [[Int]](repeating: Array(repeating: 0, count: 1), count: 15)
 ### Dictionary in Array 에서 Value 찾아 삭제
 
 ```swift
-if let index = csvData.index(where: { $0["email"] as! String == email }) {    csvData.remove(at: index)    return true}
+if let index = csvData.index(where: { $0["email"] as! String == email }) {
+    csvData.remove(at: index)
+    return true
+}
 ```
 
 
@@ -701,7 +750,10 @@ if let index = csvData.index(where: { $0["email"] as! String == email }) {    cs
 ### 조건에 맞는 것이 들어있느냐 - contain(where:)
 
 ```swift
-var foo = [1, 2, 3]print(foo.contains(where: { $0 > foo[0] }))// true
+var foo = [1, 2, 3]
+print(foo.contains(where: { $0 > foo[0] }))
+
+// true
 ```
 
 
@@ -761,7 +813,9 @@ monthDay[0..<a-1].reduce(0, +) + b
 #### reduce활용 - (인접)그래프 입력 받기
 
 ```swift
-var graph = (0..<n).reduce(into: [[Int]]()) { result, _ in    result.append(readLine()!.split(separator: " ").map { Int(String($0))! })}
+var graph = (0..<n).reduce(into: [[Int]]()) { result, _ in
+    result.append(readLine()!.split(separator: " ").map { Int(String($0))! })
+}
 ```
 
 
@@ -773,7 +827,8 @@ var graph = (0..<n).reduce(into: [[Int]]()) { result, _ in    result.append(read
 - Bool type 중 false 는 return하지 않는다
 
 ```swift
-print([true, true, false, false].filter({ $0 }))// [true, true]
+print([true, true, false, false].filter({ $0 }))
+// [true, true]
 ```
 
 
@@ -824,7 +879,9 @@ compactMapTest1 : [1, 3, 5, 6, 7]
 
 
 ```swift
-var continuousNumberArr = Array<Int>(1...5)print(continuousNumberArr)// [1, 2, 3, 4, 5]
+var continuousNumberArr = Array<Int>(1...5)
+print(continuousNumberArr)
+// [1, 2, 3, 4, 5]
 ```
 
 
@@ -844,7 +901,10 @@ let isIndexValid = array.indices.contains(index)
 ### 어서와 3D는 처음이지?
 
 ```swift
-let zArry = [Int](repeating: 0, count: 10)let yArry = [[Int]](repeating: zArry, count: 20)let xArry = [[[Int]]](repeating: yArry, count: 30)let val = xArry[2][1][1]
+let zArry = [Int](repeating: 0, count: 10)
+let yArry = [[Int]](repeating: zArry, count: 20)
+let xArry = [[[Int]]](repeating: yArry, count: 30)
+let val = xArry[2][1][1]
 ```
 
 
