@@ -20,8 +20,8 @@ Swift5를 기반으로 작성된 Swift Cheat Sheet 입니다. 본인이 성장�
 
 ## 목차
 
-- Basic Operator
-- Primitive Types
+- [Basic Operator](https://github.com/okstring/Swift-SimpleCheatSheet#basic-operators)
+- [Primitive Types](https://github.com/okstring/Swift-SimpleCheatSheet#primitive-types)
     - String
     - Int
     - CharacterSet
@@ -30,12 +30,12 @@ Swift5를 기반으로 작성된 Swift Cheat Sheet 입니다. 본인이 성장�
     - Bool
     - ASCII
     - etc.
-- Collections
+- [Collections](https://github.com/okstring/Swift-SimpleCheatSheet#collections)
     - Array
     - Dictionary
     - Set
     - etc.
-- Control Flow
+- [Control Flow](https://github.com/okstring/Swift-SimpleCheatSheet#control-flow)
     - for
     - if
     - guard
@@ -44,8 +44,8 @@ Swift5를 기반으로 작성된 Swift Cheat Sheet 입니다. 본인이 성장�
     - while, do-while
     - Checking API Availability
     - Error Handle
-- Function
-- Closure
+- [Function](https://github.com/okstring/Swift-SimpleCheatSheet#functions)
+- [Closure](https://github.com/okstring/Swift-SimpleCheatSheet#closure)
 
 정리되는데로 추가됩니다.
 
