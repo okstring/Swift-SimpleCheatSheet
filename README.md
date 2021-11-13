@@ -521,6 +521,14 @@ print(UnicodeScalar("a").value) // 97
 
 
 
+### CharacterSet.intersection(_:)
+
+- 겹치는 CharacterSet
+
+
+
+
+
 
 
 ### indices
@@ -874,6 +882,10 @@ compactMapTest1 : [1, 3, 5, 6, 7]
 
 - ArraySlice는 일시적인 저장에만 사용해라
 
+- ArraySlice는 항상 연속적인 스토리지를 사용하며 Objective-C에 연결되지 않습니다ArraySlice는 원래 배열의 수명이 끝난 후에도 일부 더 큰 배열의 저장소에 보기를 제공하므로 슬라이스를 저장하면 **더 이상 액세스할 수 없는 요소의 수명이 연장되어 명백한 메모리 및 개체 누출**로 나타날 수 있습니다. 이 효과를 방지하려면 일시적인 계산에만 어레이슬라이스를 사용하십시오.
+
+    
+
 
 
 ### 연속되는 수(`ClosedRange<Int>`) 배열로 바로 만들기 - Array Initializer with range
@@ -910,6 +922,12 @@ let val = xArry[2][1][1]
 ```
 
 
+
+
+
+### Array 성능
+
+Swift는 `ContiguousArray`를 가지는데 C 배열 성능이 필요할 때 사용합니다.  **classes** or **@objc protocol** 를 사용하는 경우에 ContiguousArray가 성능이 더 좋습니다
 
 
 
@@ -960,6 +978,25 @@ print(gradeDic["a"] ?? 0) // Nil 병합 연산자, 값이 없을시 0을 출력
 var aSet: Set = [11, 12, 13]
 aSet.contains(12)
 ```
+
+
+
+
+
+### isSuperset(of:)
+
+- 받은 set의 상위 set인지(포함하고 있는지)
+
+```swift
+let set: Set<Int> = [1, 2, 3, 4, 5]
+let setB: Set<Int> = [2, 3, 4]
+let setC: Set<Int> = [2, 3, 6]
+
+print(set.isSuperset(of: setB)) // true
+print(set.isSuperset(of: setC)) // false
+```
+
+
 
 
 
