@@ -76,6 +76,37 @@ ceil(9.1) // 10 소수점 올림
 
 
 
+
+
+### 비트시프트
+
+```swift
+let shiftBits: UInt8 = 4 
+print(shiftBits << 1) // 8
+print(shiftBits << 2) // 16
+print(shiftBits << 5) // 128
+print(shiftBits << 6) // 256
+print(shiftBits >> 2) // 1
+```
+
+
+
+### 지수 표기법(exponential notation)
+
+- 대소문자 가리는 언어도 있다
+
+```swift
+7245 = 7245.00 = 7.245E+3
+183857.419 = 1.83857419E+5
+0.00007245 = 7.245E-5
+0.0000000625431 = 6.25431E-8
+```
+
+- 10진법: 10
+- 2진법: 0b1010 = 10
+- 6진법: 0o12 = 10
+- 16진법: 0xA = 10
+
 # Primitive Types
 
 
