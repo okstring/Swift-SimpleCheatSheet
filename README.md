@@ -593,6 +593,13 @@ double-precision 64-bit IEEE 754 floating point
 
 
 
+### 부동소수점의 오차
+
+- 부동소수점을 사용하면 오차가 발생합니다.
+- Float는 소수점 6자리까지 Double은 15자리까지 정확하게 표현할 수 있습니다.
+
+
+
 ## Bool
 
 ### Set variable to the Bool
