@@ -628,6 +628,9 @@ double-precision 64-bit IEEE 754 floating point
 
 - 부동소수점을 사용하면 오차가 발생합니다.
 - Float는 소수점 6자리까지 Double은 15자리까지 정확하게 표현할 수 있습니다.
+- 10진수를 정확하게 표현할 수는 없다. (무한소수, 순환소수, 비순환소수의 경우 가수부가 표현할 수 있는 비트 수를 넘어가게 되면 손실되는 부분이 생기기 때문, 실수 또한 이진수로 표현하기 때문에 가수부가 1/2^n 꼴로 표현되는 경우만 오차없이 정확하게 값이 계산된다.)
+
+
 
 
 
@@ -1342,6 +1345,21 @@ print(calculateAverage(1, 2, 3))
 
 
 
+### function의 매개변수
+
+
+
+```swift
+func foo(by num: Int)
+```
+
+
+
+- 호출할 때 매개변수와 실제 함수를 사용할 때 매개변수 네이밍이 다르다
+- 오브젝티브-C와 호환성을 위해서 쓰는 경우도 있다
+
+
+
 # Closure
 
 클로저는 일반적으로 이런 형태를 띕니다.
@@ -1468,6 +1486,168 @@ print(bar) //Hello, okstring!
 
 
 
+
+
+
+# Structural Value Types
+
+## enum
+
+
+
+### enum - rawValue
+
+```swift
+enum Number: Int {
+    case three = 3, four, five
+}
+
+print(Number.five.rawValue)
+// 5
+```
+
+
+
+
+
+### Enum - CustomStringconvertible, func 사용 가능
+
+```swift
+enum Drink : Int, CustomStringConvertible {
+    case americano = 1, latte = 2, frapcinno = 3
+  
+    var description: String {
+        switch self {
+        case .americano:
+            return "아메리카노"
+        case .latte:
+            return "라떼"
+        case .frapcinno:
+            return "프라프치노"
+        }
+    }
+}
+```
+
+
+
+### enum 활용 예제
+
+```swift
+enum  BookFormat  {
+    case PaperBack (pageCount: Int, price: Double)
+    case HardCover (pageCount: Int, price: Double)
+    case  PDF  (pageCount:  Int,  price:  Double)
+    case  EPub  (pageCount:  Int,  price:  Double)
+    case  Kindle  (pageCount:  Int,  price:  Double)
+    
+    var  pageCount:  Int  {
+        switch  self  {
+        case  .PaperBack(let  pageCount,  _):
+            return  pageCount
+        case  .HardCover(let  pageCount,  _):
+            return  pageCount
+        case  .PDF(let  pageCount,  _):
+            return  pageCount
+        case  .EPub(let  pageCount,  _):
+            return  pageCount
+        case  .Kindle(let  pageCount,  _):
+            return  pageCount
+        }
+    }
+    var  price:  Double  {
+        switch  self  {
+        case  .PaperBack(_,  let  price):
+            return  price
+        case  .HardCover(_,  let  price):
+            return  price
+        case  .PDF(_,  let  price):
+            return  price
+        case  .EPub(_,  let  price):
+            return  price
+        case  .Kindle(_,  let  price):
+            return  price
+        }
+    }
+    
+    func  purchaseTogether(otherFormat:  BookFormat)  ->  Double  {
+        return  (self.price  +  otherFormat.price)  *  0.80
+    }
+    
+}
+```
+
+
+
+
+
+### Enum - CaseIterabel
+
+모든 case를 모을 수 있다
+
+```swift
+enum Stuff: CaseIterable {
+    case first
+    case second
+    case third
+    case forth
+}
+
+print(Stuff.allCases.count) // 4
+print(Stuff.allCases) // [TestAndTest.Stuff.first, TestAndTest.Stuff.second, TestAndTest.Stuff.third, TestAndTest.Stuff.forth]
+
+```
+
+
+
+
+
+### Nested Types in Action (중첩 타입의 실제 사례)
+
+```swift
+struct BlackjackCard {
+
+  // 중첩 열거체 Suit
+  enum Suit: Character {
+    case spades = "♠", hearts = "♡", diamonds = "♢", clubs = "♣"
+  }
+
+  // 중첩 열거체 Rank
+  enum Rank: Int {
+    case two = 2, three, four, five, six, seven, eight, nine, ten
+    case jack, queen, king, ace
+
+    struct Values {
+      let first: Int, second: Int?
+    }
+    var values: Values {
+      switch self {
+      case .ace:
+        return Values(first: 1, second: 11)
+      case .jack, .queen, .king:
+        return Values(first: 10, second: nil)
+      default:
+        return Values(first: self.rawValue, second: nil)
+      }
+    }
+  }
+
+  // BlackjackCard 의 속성과 메소드
+  let rank: Rank, suit: Suit
+  var description: String {
+    var output = "suit is \(suit.rawValue),"
+    output += " value is \(rank.values.first)"
+    if let second = rank.values.second {
+      output += " or \(second)"
+    }
+    return output
+  }
+}
+```
+
+
+
+[reference](https://docs.swift.org/swift-book/LanguageGuide/NestedTypes.html)
 
 
 
