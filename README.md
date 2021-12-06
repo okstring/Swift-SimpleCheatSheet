@@ -452,6 +452,20 @@ print(stringArray.sorted())
 
 
 
+### csv 파일 불러오기
+
+```swift
+guard let filepath = Bundle.main.path(forResource: "xy", ofType: "csv") else {
+    return
+}
+        
+let data = try! String(contentsOfFile: filepath)
+
+let csv = data.split(separator: "\n").map{ $0.split(separator: ",") }
+```
+
+
+
 ## Int
 
 
