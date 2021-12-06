@@ -78,6 +78,32 @@ ceil(9.1) // 10 소수점 올림
 
 
 
+### 올림, 내림, 반올림의 다른 방법
+
+```swift
+let x = 6.5
+
+// Equivalent to the C 'round' function:
+print(x.rounded(.toNearestOrAwayFromZero))
+// Prints "7.0"
+
+// Equivalent to the C 'trunc' function:
+print(x.rounded(.towardZero))
+// Prints "6.0"
+
+// Equivalent to the C 'ceil' function:
+print(x.rounded(.up))
+// Prints "7.0"
+
+// Equivalent to the C 'floor' function:
+print(x.rounded(.down))
+// Prints "6.0"
+```
+
+[reference](https://developer.apple.com/documentation/swift/double/2886735-rounded)
+
+
+
 ### 비트시프트
 
 ```swift
